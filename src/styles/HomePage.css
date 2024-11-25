@@ -1,0 +1,93 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #007bff;
+}
+
+.logo {
+    height: 50px;
+}
+
+nav button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #007bff;
+    font-weight: bold;
+}
+
+nav button:hover {
+    background-color: #e6e6e6;
+}
+
+main {
+    flex: 1;
+    padding: 40px 20px;
+    background-color: #f7f9fc;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.feature {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.feature h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.info {
+    text-align: center;
+}
+
+.info h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info p {
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+}
+
+.details div {
+    width: 30%;
+}
+
+.details h4 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: #fff;
+}

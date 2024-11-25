@@ -1,0 +1,71 @@
+/* frontend/src/styles/ProofUpload.css */
+.proof-upload-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .proof-upload-container h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .file-upload-section {
+    margin-bottom: 15px;
+  }
+  
+  .file-upload-section label {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .file-upload-section input[type="file"] {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .file-info {
+    margin-top: 10px;
+  }
+  
+  .file-type-selection {
+    margin-bottom: 20px;
+  }
+  
+  .file-type-selection label {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .file-type-selection select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  
+  .upload-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .upload-button:hover {
+    background-color: #45a049;
+  }
+  
+  .upload-message {
+    color: #ff4d4d;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

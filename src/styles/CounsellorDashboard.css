@@ -1,0 +1,85 @@
+.counsellor-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f7f9fc;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #007bff;
+}
+
+.counsellor-logo {
+    height: 50px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+main {
+    flex: 1;
+    padding: 40px 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.cases-section {
+    max-width: 800px;
+    margin: auto;
+}
+
+.cases-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.case-list {
+    list-style: none;
+    padding: 0;
+}
+
+.case-list li {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.case-list p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.case-list button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #17a2b8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.case-list button:hover {
+    background-color: #138496;
+}
