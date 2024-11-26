@@ -8,70 +8,99 @@ const SupportSelection = () => {
     const [supportType, setSupportType] = useState('');
     const [counselors, setCounselors] = useState([]);
     const navigate = useNavigate();
+    const victimId = '12345'; // You should retrieve this victimId dynamically
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!supportType) {
             alert("Please select a support type.");
             return;
         }
-
-        const token = localStorage.getItem('authToken'); // Ensure you're storing the token correctly
+    
+        const token = localStorage.getItem('authToken'); // Retrieve token from local storage
         console.log("JWT Token retrieved:", token);
+    
         if (!token) {
             console.error("No token found. Please login.");
-          //  window.location.href = '/login';  // Redirect to login if no token
+            alert("You must be logged in to continue.");
+            navigate('/login'); // Redirect to login page
             return;
         }
-
+    
         try {
-
-            console.log("Request Payload:", { supportType });
-
-            const response = await API.post('/api/counsellors/fetch-counsellors', { supportType }, {
-                headers: { Authorization: `Bearer ${token}` } // Token in header
+            console.log("Request Payload for fetching counselors:", { supportType });
+    
+            // Fetch counselors based on the selected support type
+            const counselorRes = await API.post('/counsellors/fetch-counsellors', { supportType }, {
+                headers: { Authorization: `Bearer ${token}` },
             });
-
-            console.log('API Response:', response.data);
-
-            // Fetch available counselors based on the selected support type
-            const counselorRes = await API.post('/api/counsellors/fetch-counsellors', { supportType });
-            const fetchedCounselors = counselorRes.data; // Use the data directly
-            setCounselors(fetchedCounselors); // Update state for UI rendering
-
-            if (fetchedCounselors.length === 0) {
+    
+            const fetchedCounselors = counselorRes.data; // Extract counselors from the response
+            console.log('Fetched Counselors:', fetchedCounselors);
+    
+            if (!fetchedCounselors || fetchedCounselors.length === 0) {
                 alert('No counselors available for the selected support type.');
                 return;
             }
-
+    
+            // Update the state with fetched counselors
+            setCounselors(fetchedCounselors);
+    
             // Proceed to assign support
-            const assignRes = await API.post('/assign-support', { supportType });
-            console.log('API Response:', assignRes.data);
-
+            console.log("Request Payload for assigning support:", { supportType });
+            const assignRes = await API.post(`/counsellors/assign-support/${victimId}`, { supportType }, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+    
+            console.log('Assign Support API Response:', assignRes.data);
+    
+            // Success notification and redirection
             alert(`Support type selected successfully! Counselor assigned: ${assignRes.data.counselor.name}`);
+            navigate(`/dashboard?supportType=${supportType}`);
+        } catch (err) {
+            console.error('Error during handleSubmit:', err);
+    
+            // Display detailed error message if available
+            const errorMessage = err.response?.data?.message || 'Failed to select support type! Please try again.';
+            alert(errorMessage);
+        }
+    };
+    
 
+    const handleAssignSupport = async () => {
+        if (!supportType) {
+            alert("Please select a support type.");
+            return;
+        }
+    
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.error("No token found. Please login.");
+            alert("You must be logged in to assign support.");
+            navigate('/login'); // Redirect to login
+            return;
+        }
+    
+        try {
+            console.log("Request Payload:", { supportType });
+    
+            // Here we're passing the victimId as part of the URL in the API request
+            const res = await API.post(`/victims/select-support/${victimId}`, { supportType }, {
+                headers: { Authorization: `Bearer ${token}` }, // Include token in headers
+            });
+    
+            console.log('API Response:', res.data); // Log API response for debugging
+            alert('Support type selected and counselor assigned successfully!');
+    
             // Navigate to the dashboard with supportType as a query parameter
             navigate(`/dashboard?supportType=${supportType}`);
         } catch (err) {
-            console.error(err);
-            alert(err.response?.data?.message || 'Failed to select support type!');
-        }
-    };
-
-
-
-    const handleAssignSupport = async () => {
-        try {
-            const res = await API.post('/victims/select-support', { supportType });
-            console.log('API Response:', res.data); // Log for debugging
-            alert('Support type selected and counselor assigned successfully!');
-
-            // Navigate to the dashboard
-            navigate(`/dashboard?supportType=${supportType}`);
-        } catch (err) {
-            console.error(err);
-            alert(err.response?.data?.message || 'Failed to assign support!');
+            console.error('Error in handleAssignSupport:', err);
+    
+            // Extract and display a meaningful error message
+            const errorMessage = err.response?.data?.message || 'Failed to assign support!';
+            alert(errorMessage);
         }
     };
 
